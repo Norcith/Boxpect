@@ -14,5 +14,5 @@ function play() {
   let link = "";
   ids.forEach((val,i) => { link += args[i] + "=" + document.getElementById(val).value + "&" });
   link += "name=Custom";
-  window.location.href = `http://bombox.neocities.org/game?${link}`;
+  window.location.href = `/game.html?${link}`;
   }
