@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bombox - Home</title>
+    <link href="/css/index.css" rel="stylesheet">
+    <script src="/js/index.js"></script>
+  </head>
+  <body onLoad="loadStuff()">
+  <div id="head" class="center">
+    <div class="main"><h1>Bombox</h1><em>Find all the bombs</em><br></div>
+    <div class="main">
+      <h2>New game</h2>
+      <a href="https://bombox.neocities.org/game?columns=3&rows=2&bombs=2&emojis=3&name=Easy" class="btn">Easy</a>
+      <a href="https://bombox.neocities.org/game?columns=4&rows=2&bombs=3&emojis=3&name=Medium" class="btn">Medium</a>
+      <a href="https://bombox.neocities.org/game?columns=5&rows=3&bombs=4&emojis=5&name=Hard" class="btn">Hard</a>
+      <br><br>
+      <details>
+        <summary>Custom game</summary>
+        <br>
+        <label for="inputColumns">Columns</label>
+        <input  type="range" id="inputColumns" min="2" max="8">
+        <label for="inputRows">Rows</label>
+        <input  type="range" id="inputRows" min="1" max="5">
+        <label for="inputBombs">Bombs</label>
+        <input  type="range" id="inputBombs" min="1" max="6">
+        <label for="inputPackage">Package types</label>
+        <input  type="range" id="inputPackage" min="1" max="6">
+        <button onClick="play()">Play</button>
+      </details>
+    </div>
+    </div><br><div class="main center maincenter">
+    <h2>How to play:</h2>
+    <ol>
+      <li><strong>Click</strong> on a package to <strong>search</strong> it.</li>
+      <li><strong>Explosive</strong> package's tags always <strong>lie</strong>.</li>
+      <li><strong>Good</strong> package's tag always tell the <strong>truth</strong>.</li>
+      <li>If you <strong>search</strong> an <strong>explosive</strong> package, the game is <strong>over</strong>.</li>
+      <li><strong>Search</strong> all <strong>good</strong> packages to <strong>win</strong>.</li>
+      <li><em>Have fun!</em></li>
+    </ol>
+    <br>
+    </div>
+      <center><footer><em>©Norcith 2026.<br>This game was inspired by the awesome <a href="https://store.steampowered.com/app/2455920/Mimic_Logic/">Mimic Logic</a> and <a href="https://cluesbysam.com/">Clues By Sam</a>. Make sure to check them out !</em></footer></center>
+  </body>
+</html>
