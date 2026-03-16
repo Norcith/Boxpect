@@ -14,7 +14,7 @@ function play() {
   let hint = "";
 
   ids.forEach((val,i) => { link += args[i] + "=" + document.getElementById(val).value + "&" });
-  for (let i = 0; i < hints; i++) { hint += document.getElementById(`inputHint${i+1}`).value.replace(true,1).replace(false,0) + "&"}
+  for (let i = 0; i < hints; i++) { hint += document.getElementById(`inputHint${i+1}`).checked.replace(true,1).replace(false,0) + "&"}
   link += hint
   link += "name=Custom";
   window.location.href = `/game.html?${link}`;
