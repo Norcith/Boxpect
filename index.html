@@ -20,16 +20,15 @@
         <summary>Custom game</summary>
         <br>
         <p><strong>General</strong></p>
-        <label for="inputColumns">Columns</label>
-        <input  type="range" id="inputColumns" min="2" max="8">
-        <label for="inputRows">Rows</label>
-        <input  type="range" id="inputRows" min="1" max="5">
-        <label for="inputBombs">Bombs</label>
-        <input  type="range" id="inputBombs" min="1" max="6">
-        <label for="inputPackage">Package types</label>
-        <input  type="range" id="inputPackage" min="1" max="6">
+        <label for="inputColumns">Columns</label><input  type="range" id="inputColumns" min="2" max="8">
+        <label for="inputRows">Rows</label><input  type="range" id="inputRows" min="1" max="5">
+        <label for="inputBombs">Bombs</label><input  type="range" id="inputBombs" min="1" max="6">
+        <label for="inputPackage">Package types</label><input  type="range" id="inputPackage" min="1" max="6">
         <p><strong>Hint types</strong></p>
-        <em>Soon!</em>
+        <label for="inputHint1">Proximity hints</label><input type="checkbox" id="inputHint1" checked>
+        <label for="inputHint1"></label>Package type hints<input type="checkbox" id="inputHint2" checked>
+        <label for="inputHint1"></label>Line & Column hints<input type="checkbox" id="inputHint3" disabled>
+
         <br>
         <button onClick="play()">Play</button>
       </details>
