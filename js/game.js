@@ -20,6 +20,7 @@ function generate() {
   const bmb = params.get("bombs");
   const emo = params.get("emojis");
   const nam = params.get("name");
+  const hin = params.get("hints");
   
   const total = lin*col;
   const emojis = ["📦", "🎁", "🧰", "🧳", "💼", "🥡"];
@@ -64,18 +65,24 @@ function generate() {
   }
   console.log(states);
 
-//Hint generation
+  //Hint generation
+    //Find enabled hints
+  let counter = 0;
+  let hints = [];
+
+  hin.forEach ((val, i) => {if (val === "1") { hints.push(counter); counter++;} else { hints.push(0) }});
+
   k = 0;
   for (let i = 0; i < lin; i++) {
   for (let j = 0; j < col; j++) {
-    let random = Math.floor(Math.random()*2); //Remember to increase the factor for each hint type
+    let random = Math.floor(Math.random()*hin.filter(val => val === "1").length);
     let question = [];
     let negation;
     let not;
     let selected;
     
   //Proximity hint
-    if (random == 0) {
+    if (random == hints[0]) {
       if (j === 0) { 
         if (i === 0)        { question = [[2,k+1],[1,k+col]] }
         else if (i===lin-1) { question = [[2,k+1],[0,k-col]] }
@@ -100,7 +107,7 @@ function generate() {
       document.querySelector("#" + ids[k] + " p").innerHTML = "The box " + expressions[0][selected[0]] + " is " + not + " a bomb.";
     }
   //Emoji hint
-    if (random === 1) {
+    if (random === hints[1]) {
       selected = document.querySelector("#" + ids[Math.floor(Math.random()*ids.length)] + " button").innerHTML.trim().replace(/\uFE0F/g, "");
       
       negation = -1;
