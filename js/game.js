@@ -225,12 +225,12 @@ function setOverlay(title,text) {
     let getMins = localStorage.getItem(`bestMinutes${nam}`);
     let getSecs = localStorage.getItem(`bestSeconds${nam}`);
 
-    if (currentMins >= localStorage.getItem(getMins) && currentSecs > localStorage.getItem(getSecs) && ["Easy","Normal","Hard"].includes(nam)) {
+    if (currentMins >= getMins && currentSecs > getSecs && ["Easy","Normal","Hard"].includes(nam)) {
       if (replace) {  
         localStorage.setItem(getMins,currentMins);
         localStorage.setItem(getSecs,currentSecs);
     }
-      document.getElementById("bestMinutes").innerHTML = localStorage.getItem(getMins);
-      document.getElementById("bestSeconds").innerHTML = localStorage.getItem(getSecs);
+      document.getElementById("bestMinutes").innerHTML = getMins;
+      document.getElementById("bestSeconds").innerHTML = getSecs;
   }
 }
