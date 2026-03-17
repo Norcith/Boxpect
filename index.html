@@ -12,25 +12,23 @@
     <div class="main"><h1>Boxpect</h1><em>Find all the bombs</em><br></div>
     <div class="main">
       <h2>New game</h2>
-      <a href="/game.html?columns=3&rows=2&bombs=2&emojis=3&name=Easy" class="btn">Easy</a>
-      <a href="/game.html?columns=4&rows=2&bombs=3&emojis=3&name=Medium" class="btn">Medium</a>
-      <a href="/game.html?columns=5&rows=3&bombs=4&emojis=5&name=Hard" class="btn">Hard</a>
+      <a href="/game.html?columns=3&rows=2&bombs=2&emojis=3&name=Easy&hints=111" class="btn">Easy</a>
+      <a href="/game.html?columns=4&rows=2&bombs=3&emojis=3&name=Medium&hints=111" class="btn">Medium</a>
+      <a href="/game.html?columns=5&rows=3&bombs=4&emojis=5&name=Hard&hints=111" class="btn">Hard</a>
       <br><br>
       <details>
         <summary>Custom game</summary>
         <br>
         <p><strong>General</strong></p>
-        <label for="inputColumns">Columns</label>
-        <input  type="range" id="inputColumns" min="2" max="8">
-        <label for="inputRows">Rows</label>
-        <input  type="range" id="inputRows" min="1" max="5">
-        <label for="inputBombs">Bombs</label>
-        <input  type="range" id="inputBombs" min="1" max="6">
-        <label for="inputPackage">Package types</label>
-        <input  type="range" id="inputPackage" min="1" max="6">
+        <label for="inputColumns">Columns</label><input  type="range" id="inputColumns" min="2" max="8">
+        <label for="inputRows">Rows</label><input  type="range" id="inputRows" min="1" max="5">
+        <label for="inputBombs">Bombs</label><input  type="range" id="inputBombs" min="1" max="6">
+        <label for="inputPackage">Package types</label><input  type="range" id="inputPackage" min="1" max="6">
         <p><strong>Hint types</strong></p>
-        <em>Soon!</em>
-        <br><br>
+        <label for="inputHint1">Proximity hints</label><input type="checkbox" id="inputHint1" checked><br>
+        <label for="inputHint1"></label>Package type hints<input type="checkbox" id="inputHint2" checked><br>
+        <label for="inputHint1"></label>Line & Column hints<input type="checkbox" id="inputHint3" disabled>
+        <br>
         <button onClick="play()">Play</button>
       </details>
     </div>

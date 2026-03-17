@@ -20,6 +20,7 @@ function generate() {
   const bmb = params.get("bombs");
   const emo = params.get("emojis");
   const nam = params.get("name");
+  const hin = params.get("hints");
   
   const total = lin*col;
   const emojis = ["📦", "🎁", "🧰", "🧳", "💼", "🥡"];
@@ -64,11 +65,18 @@ function generate() {
   }
   console.log(states);
 
-//Hint generation
+  //Hint generation
+    //Find enabled hints
+  let hints = [];
+
+  for (let i = 0; i < hin.length; i++) {
+    if (hin[i] === "1") { hints.push(i) }
+  }
+
   k = 0;
   for (let i = 0; i < lin; i++) {
   for (let j = 0; j < col; j++) {
-    let random = Math.floor(Math.random()*2); //Remember to increase the factor for each hint type
+    let random = hints[Math.floor(Math.random() * hints.length)];
     let question = [];
     let negation;
     let not;
