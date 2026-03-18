@@ -4,6 +4,7 @@ let remain;
 let target;
 let isPlaying;
 let timer;
+let nam;
 
 window.addEventListener("beforeunload", (leave) => {
   if (isPlaying === 1) {
@@ -14,11 +15,11 @@ window.addEventListener("beforeunload", (leave) => {
 
 function generate() {
   const params = new URLSearchParams(window.location.search);
-  const col = params.get("columns");
-  const lin = params.get("rows");
-  const bmb = params.get("bombs");
-  const emo = params.get("emojis");
-  const nam = params.get("name");
+  const col = Number(params.get("columns"));
+  const lin = Number(params.get("rows"));
+  const bmb = Number(params.get("bombs"));
+  const emo = Number(params.get("emojis"));
+  nam = params.get("name");
   const hin = params.get("hints");
   
   const total = lin*col;
@@ -120,21 +121,24 @@ function generate() {
     }
   //Row & Column hint
     if (random === 2) {
-      selected = Math.floor(Math.random() * total);
-      if (states[selected] === "bomb") {negation = 1}
-      if (states[k] === "bomb") {negation *= -1}
-      
       random = Math.random()
       if (random < 0.5) {
-        var1 = "column";
-        var2 = selected % col;
+        var1 = col;
+        var2 = "column";
       } else {
-        var1 = "row";
-        var2 = Math.floor(selected / col);
+        var1 = lin
+        var2 = "row";
+      }
+      selected = Math.floor(Math.random() * var1);
+      
+      for (let l = 0; l < var1; l++) {
+        if (var1 === lin && states[selected * var1 + l] === "bomb") {negation = 1}
+        if (var1 === col && states[selected + var1 * l] === "bomb") {negation = 1}
       }
 
+      if (states[k] === "bomb") {negation *= -1}
       if (negation === -1) {not = "are no bombs"} else {not = "is at least 1 bomb"}
-      tag.innerHTML = "There " + not + " in " + var1 + " n°" + (var2 + 1)
+      tag.innerHTML = "There " + not + " in " + var2 + " n°" + (selected+1)
 
     }
     k++;
@@ -150,6 +154,7 @@ function generate() {
   document.getElementById("counterMax").innerHTML = target;
   
   isPlaying = 0;
+/*  updateBest(false); */
   timer = setInterval(updateTimer,1000);
 }
 
@@ -180,6 +185,7 @@ function iconClick(element) {
       isPlaying = 3;
       document.getElementById("audioWin").play();
       setTimeout(() => setOverlay("You win","Good job! You found all the non-bomb packages"), 100)
+/*      updateBest(true) */
     }
   }
   element.querySelector("p").style.textDecoration = "underline DimGray";
@@ -190,15 +196,17 @@ function lose() {
 }
 
 function updateTimer() {
+  let seconds = document.getElementById("timerSeconds");
+  let minutes = document.getElementById("timerMinutes");
   if (isPlaying < 2) { 
-    let seconds = document.getElementById("timerSeconds");
-    let minutes = document.getElementById("timerMinutes");
     if (seconds.innerHTML === "59") {
       minutes.innerHTML = String((Number(minutes.innerHTML) + 1)).padStart(2,"0")
       seconds.innerHTML = "00"
   }
     else { seconds.innerHTML = String((Number(seconds.innerHTML) + 1)).padStart(2,"0") }
-  } else if (Number(seconds.innerHTML) > 0) { clearInterval(timer) }
+  } else if (Number(seconds.innerHTML) > 0) { 
+    clearInterval(timer);
+  }
 }
 
 function revealBomb(element) {
@@ -213,3 +221,26 @@ function setOverlay(title,text) {
   overlay.querySelector("h1").innerHTML = title
   overlay.querySelector("p").innerHTML = text
   }
+
+/*   function updateBest(replace) {
+    let currentMins = document.getElementById("timerMinutes").innerHTML;
+    let currentSecs = document.getElementById("timerSeconds").innerHTML;
+    let minsKey = `bestMinutes${nam}`;
+    let secsKey = `bestSeconds${nam}`;
+    let getMins = localStorage.getItem(minsKey);
+    let getSecs = localStorage.getItem(secsKey);
+
+    if (((currentMins <= getMins && currentSecs < getSecs) || (getMins === null)) && ["Easy","Normal","Hard"].includes(nam)) {
+      if (replace) {
+        localStorage.setItem(minsKey,currentMins);
+        localStorage.setItem(secsKey,currentSecs);
+        getMins = currentMins;
+        getSecs = currentSecs;
+    }
+  }
+  if (getMins !== null) {
+    document.getElementById("bestMinutes").innerHTML = getMins;
+    document.getElementById("bestSeconds").innerHTML = getSecs;
+  }
+}
+ */
