@@ -121,21 +121,21 @@ function generate() {
     }
   //Row & Column hint
     if (random === 2) {
-      selected = Math.floor(Math.random() * total);
-      if (states[selected] === "bomb") {negation = 1}
-      if (states[k] === "bomb") {negation *= -1}
-      
       random = Math.random()
       if (random < 0.5) {
-        var1 = "column";
-        var2 = selected % col;
+        var1 = col;
+        var2 = "column";
       } else {
-        var1 = "row";
-        var2 = Math.floor(selected / col);
+        var1 = lin
+        var2 = "line";
       }
+      selected = Math.floor(Math.random() * var1);
+      
+      for (let l = 0; l < var1; l++) {if (states[(selected-1)*var1+l] === "bomb") {negation = 1}}
 
+      if (states[k] === "bomb") {negation *= -1}
       if (negation === -1) {not = "are no bombs"} else {not = "is at least 1 bomb"}
-      tag.innerHTML = "There " + not + " in " + var1 + " n°" + (var2 + 1)
+      tag.innerHTML = "There " + not + " in " + var2 + " n°" + selected
 
     }
     k++;
@@ -151,7 +151,7 @@ function generate() {
   document.getElementById("counterMax").innerHTML = target;
   
   isPlaying = 0;
-  updateBest(false);
+/*  updateBest(false); */
   timer = setInterval(updateTimer,1000);
 }
 
@@ -182,7 +182,7 @@ function iconClick(element) {
       isPlaying = 3;
       document.getElementById("audioWin").play();
       setTimeout(() => setOverlay("You win","Good job! You found all the non-bomb packages"), 100)
-      updateBest(true)
+/*      updateBest(true) */
     }
   }
   element.querySelector("p").style.textDecoration = "underline DimGray";
@@ -219,18 +219,25 @@ function setOverlay(title,text) {
   overlay.querySelector("p").innerHTML = text
   }
 
-  function updateBest(replace) {
+/*   function updateBest(replace) {
     let currentMins = document.getElementById("timerMinutes").innerHTML;
     let currentSecs = document.getElementById("timerSeconds").innerHTML;
-    let getMins = localStorage.getItem(`bestMinutes${nam}`);
-    let getSecs = localStorage.getItem(`bestSeconds${nam}`);
+    let minsKey = `bestMinutes${nam}`;
+    let secsKey = `bestSeconds${nam}`;
+    let getMins = localStorage.getItem(minsKey);
+    let getSecs = localStorage.getItem(secsKey);
 
-    if (currentMins >= getMins && currentSecs > getSecs && ["Easy","Normal","Hard"].includes(nam)) {
-      if (replace) {  
-        localStorage.setItem(getMins,currentMins);
-        localStorage.setItem(getSecs,currentSecs);
+    if (((currentMins <= getMins && currentSecs < getSecs) || (getMins === null)) && ["Easy","Normal","Hard"].includes(nam)) {
+      if (replace) {
+        localStorage.setItem(minsKey,currentMins);
+        localStorage.setItem(secsKey,currentSecs);
+        getMins = currentMins;
+        getSecs = currentSecs;
     }
-      document.getElementById("bestMinutes").innerHTML = getMins;
-      document.getElementById("bestSeconds").innerHTML = getSecs;
+  }
+  if (getMins !== null) {
+    document.getElementById("bestMinutes").innerHTML = getMins;
+    document.getElementById("bestSeconds").innerHTML = getSecs;
   }
 }
+ */
