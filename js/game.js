@@ -132,8 +132,8 @@ function generate() {
       selected = Math.floor(Math.random() * var1);
       
       for (let l = 0; l < var1; l++) {
-        if (states[var1 === lin && (selected-1) * var1 + l] === "bomb") {negation = 1}
-        if (states[var1 === col && (selected-1) + var1 * l] === "bomb") {negation = 1}
+        if (var1 === lin && states[(selected-1) * var1 + l] === "bomb") {negation = 1}
+        if (var1 === col && states[(selected-1) + var1 * l] === "bomb") {negation = 1}
       }
 
       if (states[k] === "bomb") {negation *= -1}
